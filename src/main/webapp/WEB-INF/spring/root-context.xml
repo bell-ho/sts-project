@@ -8,7 +8,7 @@
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
         <property name="jdbcUrl"
-                  value="jdbc:log4jdbc://sts-project.ckrxh8kwbp9e.ap-northeast-2.rds.amazonaws.com:3306/sts_project"/>
+                  value="jdbc:log4jdbc:mariadb://sts-project.ckrxh8kwbp9e.ap-northeast-2.rds.amazonaws.com:3306/sts_project"/>
         <property name="username" value="sts"/>
         <property name="password" value="managermanager"/>
     </bean>
