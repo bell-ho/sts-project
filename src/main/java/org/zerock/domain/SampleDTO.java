@@ -1,6 +1,7 @@
 package org.zerock.domain;
 
-import lombok.Data;
+import lombok.*;
+
 
 @Data
 public class SampleDTO {

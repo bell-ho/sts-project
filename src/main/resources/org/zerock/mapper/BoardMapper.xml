@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.BoardMapper">
+
+    <select id="getList" resultType="org.zerock.domain.BoardVO">
+        SELECT board_number
+             , board_title
+             , board_content
+             , board_writer
+             , board_register_date
+             , board_update_date
+        FROM board
+    </select>
+
+    <insert id="insert">
+        insert into board( board_number
+                         , board_title
+                         , board_content
+                         , board_writer
+                         , board_register_date
+                         , board_update_date)
+        values ( NEXTVAL(seq_board)
+               , #{boardTitle}
+               , #{boardContent}
+               , #{boardWriter}
+               , now()
+               , now())
+    </insert>
+
+    <insert id="insertKey">
+        <selectKey keyProperty="boardNumber" order="BEFORE" resultType="int">
+            select NEXTVAL(seq_board) from dual
+        </selectKey>
+
+        insert into board(
+        board_number
+        , board_title
+        , board_content
+        , board_writer
+        , board_register_date
+        , board_update_date
+        )
+        values
+        (
+        #{boardNumber}
+        , #{boardTitle}
+        , #{boardContent}
+        ,#{boardWriter}
+        ,now()
+        ,now()
+        )
+    </insert>
+
+    <select id="read" resultType="org.zerock.domain.BoardVO">
+        select board_number
+             , board_title
+             , board_content
+             , board_writer
+             , board_register_date
+             , board_update_date
+        from board
+        where board_number = #{boardNumber}
+    </select>
+
+    <delete id="delete">
+        delete
+        from board
+        where board_number = #{boardNumber}
+    </delete>
+
+    <update id="update">
+        update board
+        set board_title       = #{boardTitle}
+          , board_content     = #{boardContent}
+          , board_update_date = now()
+        where board_number = #{boardNumber}
+    </update>
+</mapper>
